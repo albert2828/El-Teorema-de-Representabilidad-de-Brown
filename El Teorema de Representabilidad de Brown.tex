@@ -1,0 +1,91 @@
+\documentclass{beamer}
+\usetheme{Montpellier}
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{professionalfonts}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+
+\newtheorem{teo}{Teorema}
+\newtheorem{pro}{Proposici\'on}
+\newtheorem{cor}{Corolario}
+\newtheorem{lem}{Lema}
+\newtheorem{df}{Definici\'on}
+\newtheorem{ejem}{Ejemplo}
+\newtheorem{obs}{Observaci\'on}
+\newtheorem{no}{Notaci\'on}
+
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\HT}{\mathbf{hTop}}
+\newcommand{\T}{\mathbf{Top}}
+\newcommand{\con}{\mathbf{Set}}
+\newcommand{\G}{\mathbf{Ab}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert#1`diname#1`/basename#1.tif`.´png}
+
+\title{El Teorema de Representabilidad de Brown}
+\author{Luis Alberto Macías Barrales}
+\institute{Instituto de Matemáticas, UNAM}
+\date{Semestre 2020-2}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Indice}
+\tableofcontents
+\end{frame}
+
+
+\section{Funtores representables}
+
+\begin{frame}{Funtores representables}
+	\begin{df}
+	Sea $F\colon \mathbf{C}\to\mathbf{Set}$ un funtor contravariante, decimos que $F$ es representable si existe un objeto $C$ en $\mathbf{C}$ y una equivalencia natural $\varphi\colon F\to Mor_\mathbf{C} (\_ ,C)$. Al objeto $C$ lo llamamos objeto clasificante de $F$.
+	\end{df}
+	
+	Notemos que por el lema de Yoneda, el objeto clasificante es único salvo isomorfismo.
+\end{frame}
+
+\begin{frame}{Nota histórica}
+	(Agregar una nota histórica sobre los funtores representables)
+\end{frame}
+
+\begin{frame}{¿Qué información nos proporcionan los funtores?}
+	
+	\begin{ejem}
+		 Sea $H^n \colon \mathbf{hW}\to \mathbf{Ab}$ el $n-$ésimo funtor de cohomología singular (con coeficientes en $\Z$). $H^n$ nos clasifica en cierto modo los \emph{agujeros} $n-$dimensionales de un espacio $X$. Tenemos la siguiente sucesión exacta:
+			\[0 \to Ext_\Z (H_{n-1}(X),\Z)\to H^n(X) \to Hom_\Z (H_n (X),\Z)\to0\]
+			Y si $X$ es $n-1$ conexo, utilizando el teorema general de Hurewicz, tenemos que $H_{n-1}(X)\cong 0$ y que $H_n (x)\cong \pi_n (X)$. Por lo que obtenemos un isomorfismo 
+	\[H^n(X)\cong Hom_\Z(\pi_n(X),\Z)\]
+	\end{ejem}
+\end{frame}
+
+\begin{frame}
+	
+		
+\end{frame}
+
+
+
+
+\end{document}
