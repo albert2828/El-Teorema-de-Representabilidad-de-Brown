@@ -1,2 +1,6 @@
 \babel@toc {spanish}{}
 \beamer@sectionintoc {1}{Funtores representables}{3}{0}{1}
+\beamer@sectionintoc {2}{El Teorema de Representabilidad de Brown}{7}{0}{2}
+\beamer@sectionintoc {3}{Teor\IeC {\'\i }as de cohomolog\IeC {\'\i }a}{40}{0}{3}
+\beamer@sectionintoc {4}{Espectros}{44}{0}{4}
+\beamer@sectionintoc {5}{Referencias}{49}{0}{5}

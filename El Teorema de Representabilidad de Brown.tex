@@ -20,7 +20,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{tikz-cd}
+\usepackage[all]{xy}
 
 \newtheorem{teo}{Teorema}
 \newtheorem{pro}{Proposici\'on}
@@ -30,6 +30,7 @@
 \newtheorem{ejem}{Ejemplo}
 \newtheorem{obs}{Observaci\'on}
 \newtheorem{no}{Notaci\'on}
+\newtheorem{dem}{Demostraci\'on}
 
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\HT}{\mathbf{hTop}}
@@ -37,6 +38,9 @@
 \newcommand{\con}{\mathbf{Set}}
 \newcommand{\G}{\mathbf{Ab}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\W}{\mathbf{hW}}
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert#1`diname#1`/basename#1.tif`.´png}
 
@@ -64,16 +68,15 @@
 	\end{df}
 	
 	Notemos que por el lema de Yoneda, el objeto clasificante es único salvo isomorfismo.
+	
+	¿Por qué son importantes los funtores representables?
 \end{frame}
 
-\begin{frame}{Nota histórica}
-	(Agregar una nota histórica sobre los funtores representables)
-\end{frame}
 
 \begin{frame}{¿Qué información nos proporcionan los funtores?}
 	
 	\begin{ejem}
-		 Sea $H^n \colon \mathbf{hW}\to \mathbf{Ab}$ el $n-$ésimo funtor de cohomología singular (con coeficientes en $\Z$). $H^n$ nos clasifica en cierto modo los \emph{agujeros} $n-$dimensionales de un espacio $X$. Tenemos la siguiente sucesión exacta:
+		 Sea $H^n \colon \mathbf{hW}\to \mathbf{Ab}$\footnote{$\mathbf{W}$ es la categoría de complejos CW conectables por trayectorias.}, el $n-$ésimo funtor de cohomología singular (con coeficientes en $\Z$). $H^n$ nos clasifica en cierto modo los \emph{agujeros} $n-$dimensionales de un espacio $X$. Tenemos la siguiente sucesión exacta:
 			\[0 \to Ext_\Z (H_{n-1}(X),\Z)\to H^n(X) \to Hom_\Z (H_n (X),\Z)\to0\]
 			Y si $X$ es $n-1$ conexo, utilizando el teorema general de Hurewicz, tenemos que $H_{n-1}(X)\cong 0$ y que $H_n (x)\cong \pi_n (X)$. Por lo que obtenemos un isomorfismo 
 	\[H^n(X)\cong Hom_\Z(\pi_n(X),\Z)\]
@@ -81,11 +84,430 @@
 \end{frame}
 
 \begin{frame}
-	
-		
+	\begin{ejem}
+		Sea $\mathbb{K}=\R, \mathbb{C}$ y sea $n\in\N$, entonces tenemos el funtor $Vect_\mathbb{K} ^n\colon \mathbf{hW}\to \con$, que nos proporciona información sobre los haces vectoriales de $dim_\mathbb{K} =n$ 
+	\end{ejem}
 \end{frame}
 
+\begin{frame}
+	\begin{ejem}
+		Sea $Y$ un espacio con el tipo de homotopía de un CW. Tomamos el funtor $[\_, Y]_\ast\colon \mathbf{hW}_\ast\to \con_\ast$. 
+		
+		\begin{itemize}
+			\item Si conocemos bien al espacio $Y$, entonces podemos decir qué tipo de información codifica este funtor. (Por ejemplo si $Y$ es contraíble o en general si conocemos su grupo fundamental).
+			\item Si tenemos información del funtor, entonces podemos dar información homtópica de $Y$ (Esta es la filosofía del \emph{encaje de Yoneda}.)
+		\end{itemize}
+	\end{ejem}
+\end{frame}
 
+\section{El Teorema de Representabilidad de Brown}
 
+\begin{frame}{El Teorema de Representabilidad de Brown}
+	Este teorema fue formulado por Edgar H. Brown y publicado en un artículo en 1962. Establece condiciones suficientes para que un funtor contravariante $T\colon \mathbf{hW}\to \con$ sea representable. 
+	\begin{no}
+		Sean $T\colon \W_\ast \to \con_\ast$ un funtor contravariante, $i\colon X\to Y$ una inclusión de subespacios y $v\in T(Y)$, denotamos por $v|X$ a $T[i](v)          \in T(X)$.
+	\end{no}
+\end{frame}
+
+\begin{frame}{Definiciones}	
+	\begin{df}
+		Sea $T\colon \W_\ast \to \con_\ast$ un funtor contravariante. Decimos que $T$ es un funtor de Brown si cumple las siguientes dos propiedades:
+		\begin{itemize}
+			\item (Aditividad o cuña) Si $\{X_\alpha\}_{\alpha\in\Lambda}$ es una familia de espacios punteados, $i_\alpha \colon X_\alpha \to X=\bigvee_\alpha X_\alpha$ son las inclusiones, entonces estas inducen una biyección 
+			\[(T[i_\alpha ])_\alpha \colon T(X)\to \prod_\alpha T(X_\alpha)\]
+			\item (Mayer-Vietoris) Si $(X,A,B)$ es una triada escisiva (es decir, tal que $A^\circ \cup B^\circ = X$), entonces para cualesquiera $u\in T(A)$ y $v\in T(B)$ tales que $u|A\cap B = v|A\cap B$, entonces existe un $z\in T(X)$ tal que $z|A=u$ y $z|B=v$. 
+		\end{itemize}
+	\end{df}
+\end{frame}
+
+\begin{frame}
+	\begin{ejem}
+		Sea $\tilde{H}^n \colon \mathbf{hW}_\ast\to \con_\ast$ el $n-$ésimo funtor de cohomología singular reducida (con coeficientes en $\Z$) sin pensar en la estructura de grupo.
+	\end{ejem}
+\end{frame}
+
+\begin{frame}{Algunos conceptos previos}
+	\begin{df}
+		Sean $[f],[g]\colon C\to Y$ clases de homotopía de funciones basadas, un coigualador para $[f]$ y $[g]$ es una clase de homotopía $[j]\colon Y\to X$ tal que:
+		\begin{enumerate}
+			\item $[j]\circ[f]=[j]\circ[g]$
+			\item Si $[j'] \colon Y\to X'$  es otra clase de homotopía tal que $[j']\circ[f]=[j']\circ[g]$, entonces existe una única clase de homotopía $[h]\colon X\to X'$ tal que $[j']=[h]\circ[j]$.
+		\end{enumerate}
+	\end{df}
+\end{frame}
+
+\begin{frame}{Algunos conceptos previos}
+	En un diagrama		
+		\[
+		\xymatrix{ C \ar@<1ex>[r]^{[f]}\ar[r]_{[g]} & Y\ar[r]^{[j]} \ar[dr]_{[j']} & X\ar[d]^{[h]}\\
+		&& X'
+		}		
+		\]
+		
+	\begin{obs}
+		La noción de coigualador se puede definir en un contexto categórico general.
+	\end{obs}
+\end{frame}
+	
+\begin{frame}{Algunos conceptos previos}
+	\begin{obs}
+		Los coigualadores siempre existen en $\W_\ast$. Sea $X=Y\cup_f ^g C\times I=Y\sqcup C\times I /\sim$, donde $(c,0)\sim f(c)$, $(c,1)\sim g(c)$ y $(c_0 ,t)\sim y_0$. Sea $[j]\colon Y\to X$ la clase de la composición $Y \hookrightarrow Y\sqcup C\times I \twoheadrightarrow X$. 
+	\end{obs}
+	
+	\begin{ejem}
+		Cuando $g$ es la función constante, entonces tenemos que
+		\[Y\cup_f ^g C\times I \cong Y\cup_f CX = C_f\]
+		A $C_f$ se le llama cofibra homotópica de $f$.
+	\end{ejem}
+\end{frame}
+
+\begin{frame}{Algunos conceptos previos}
+	\begin{pro}
+		Sea $T\colon \W_\ast \to \con_\ast$ un funtor contravariante que cumple la propiedad de Mayer-Vietoris, entonces cumple lo siguiente: si $f,g\colon C \to Y$ son mapeos punteados y $w\in T(Y)$ son tales que $T[f](w)=T[g](w)$, entonces existe $v\in T(X)$ tal que $T[j](v)=w$, donde $[j]\colon Y\to X$ es un coigualador para $[f]$ y $[g]$.
+	\end{pro}
+	\begin{dem}
+		Sea $X'=X=Y\cup_f ^g C\times I$ el doble cilindro de adjunción. Tomamos $A=Y\cup_f C\times [0,1)$ y $B=Y\cup^g(0,1]$. Entonces la triada $(X',A,B)$ es escisiva y $A\cap B\cong C\times(0,1)\simeq C$. 
+	\end{dem}
+\end{frame}
+
+\begin{frame}{Algunos conceptos previos}
+	\begin{dem}
+		Sean $p\colon A\to Y$ y $q\colon B\to Y$ tales que $p|Y=q|Y=id$ y $p|C\times[0,1)=f$ $q|C\times(1,0]=g$ (que son equivalencias homotópicas). Tomamos $u=T[p](w)$ y $v'=T[q](w)$. Como $T[f](w)=T[g](w)$, entonces $u|A\cap B= v'|A\cap B$, entonces por la propiedad de Mayer-Vietoris, existe $z\in T(X')$ tal que $z|A=u$ y $z|B=v$.
+		
+		Notemos que la inclusión $j'\colon Y\hookrightarrow A \twoheadrightarrow X$ es tal que $j'\circ f\simeq j'\circ g$. Como $[j]\colon Y\to X$ es un coequalizador, existe un mapeo punteado $h\colon X\to X'$ tal que $h\circ j\simeq j'$. Entonces el elemento $v=T[h](z)\in T(X)$ es tal que $T[j](v)=w$.
+	\end{dem}
+\end{frame}
+
+\begin{frame}{Algunos conceptos previos}
+	\begin{pro}
+		Sea $T$ un funtor de Brown. Si $\{\ast\}$ es el espacio de un punto, entonces $T(\{\ast\})$ también tiene un solo punto.
+	\end{pro}
+	
+	\begin{dem}
+		Como $\{\ast\}\vee\{\ast\}\cong \{\ast\}$, entonces $T(\{\ast\})\cong T(\{\ast\})\times T(\{\ast\})$ con la función inducida por las inclusiones, pero esta es la función diagonal. Esto pasa solo si $T(\{\ast\})$ tiene un solo punto.
+	\end{dem}	
+\end{frame}
+
+\begin{frame}{Algunos conceptos previos}
+	\begin{pro}
+		Sea $T$ un funtor de Brown. Si $X=SX'$, para algún espacio punteado $X'$, entonces $T(X)$ tiene extructura de grupo con elemento neutro el elemento distinguido de $T(X)$. Si además, $X'=SX''$, entonces $T(X)$ es un grupo abeliano.
+	\end{pro}
+\end{frame}
+
+\begin{frame}{Elementos universales}
+	\begin{obs}
+		Por el Lema de Yoneda, para probar que un funtor $T$ es representable, basta con encontrar un elemento universal $u\in T(Y)$, para algún espacio punteado con el tipo de homotopía de un CW. Donde un elemento es universal si la función $\varphi_u \colon [X,Y]_\ast \to T(X)$ dada por $\varphi_u ([f])=T[f](u)$, es una biyección.
+	\end{obs}
+\end{frame}
+
+\begin{frame}{Elementos $n-$universales}
+	\begin{df}
+		Dado un funtor $T\colon \W_\ast \to \con_\ast$ y un complejo $Y$, decimos que un elemento $u\in T(Y)$ es $n-$universal si para toda $1\leq q<n$, la función $\varphi_u \colon \pi_q(Y) \to T(\mathbb{S}^q)$ es un isomorfismo y es un epimorfismo para $q=n$.
+		
+		Decimos que $u$ es $\infty-$universal si es $n-$universal para toda $n\geq1$.
+	\end{df}
+\end{frame}
+
+\begin{frame}
+	\begin{lem}
+		Sea $X$ un espacio en $\W_\ast$ y $u\in T(X)$, entonces existe un espacio $Y_1$ tal que $X\subseteq Y_1$ y un elemento $1-$universal $u_1\in T(Y_1 )$ tal que $u_1 |X=u$.
+	\end{lem}
+	
+	\begin{dem}
+		Para cada $\alpha\in T(\mathbb{S}^1)$, tomamos una copia $\mathbb{S}_\alpha ^1$ de $\mathbb{S}^1$ y consideramos $Y_1 = X \vee \bigvee_\alpha \mathbb{S}^1 _\alpha$. Sea $u_1 \in T(Y_1)$ tal que corresponda a $(u,(\alpha)_\alpha)\in T(X)\times \prod_\alpha T(\mathbb{S}_\alpha^1)$ bajo la equivalencia de la propiedad de aditividad. Entonces $u_1|X=u$ y si $\alpha\in T(\mathbb{S}^1)$, entonces $\varphi_{u_1}([i_\alpha])=T[i_\alpha](u_1)=\alpha$.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	Pues los siguientes diagramas con conmutativos
+	\[\xymatrix{
+		T(Y_1)\ar[rr]^{(T[i],(T[i_\alpha])_\alpha)}_\cong \ar[rd]_{T[i]} & & T(X)\times\prod_\alpha T(\mathbb{S}_\alpha^1)\ar[ld]^{proj_X} \\
+		& T(X) &	
+	}\]
+	\[\xymatrix{
+		T(Y_1)\ar[rr]^{(T[i],(T[i_\alpha])_\alpha)}_\cong \ar[rd]_{T[i_\alpha]} & & T(X)\times\prod_\alpha T(\mathbb{S}_\alpha^1)\ar[ld]^{proj_{\mathbb{S}_\alpha}} \\
+		& T(\mathbb{S}^1) &	
+	}\]
+\end{frame}
+
+\begin{frame}
+	\begin{pro}
+		Dado un espacio $X$ en $\W_\ast$ y $u\in T(X)$, existen $Y_n$ un espacio que se obtiene a partir de $X$ pegando celdas de dimensión menor o igual a $n$ y un elemento $n-$universal $u_n \in T(Y_n)$ tal que $u_n | X= u$. 
+	\end{pro}
+	
+	\begin{dem}
+		Será por inducción sobre $n$. Supongamos que hemos construído un espacio $Y_{n-1}$, que se obtiene a partir de $X$ pegando celdas de dimensión menor o igual a $n-1$, y un elemento $(n-1)-$universal $u_{n-1}\in T(Y_{n-1})$ tal que $u_{n-1}|X=u$.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Para cada $\beta\in T(\mathbb{S}^n)$, tomamos una copia $\mathbb{S}_\beta ^n$ y consideramos $Y_n ' = Y_{n-1}\vee\bigvee_\beta \mathbb{S}_\beta^n$. Sea $u_n '\in T(Y_n ')$ tal que corresponda a $(u_{n-1},(\beta)_\beta)\in T(Y_{n-1}')\times\prod_\beta T(\mathbb{S}_\beta ^n)$. Así, $\varphi_{u_n'}\colon \pi_n(Y_n')\to T(\mathbb{S}^n)$ es suprayectiva.
+		
+		Cada $\alpha\in\pi_{n-1}(Y_n')$ tal que $\varphi_{u_n'}(\alpha)=0\in T(\mathbb{S}^{n-1})$ es representada por una función (basada) $f_\alpha\colon \mathbb{S}_\alpha^{n-1}=\mathbb{S}^{n-1}\to Y_n'$. Sea $Y_n=C_f$, donde $f\colon\bigvee_\alpha\mathbb{S}_\alpha^{n-1}\to Y_n'$ es tal que $f|\mathbb{S}_\alpha^{n-1}=f_\alpha$.
+		
+		Notemos que $C\mathbb{S}^{n-1}\cong \mathbb{D}^n$, por lo que $Y_n$ se obtiene a partir de $Y'_n$ pegando celdas de dimensión $n$ y por lo tanto también de $Y_{n-1}$. Además, $\pi_q$ no cambia al pegar celdas de dimensión $n$ para $q\leq n-2$.
+		
+		Entonces $j_\#\colon \pi_q(Y_n')\to \pi_q(Y_n)$ es un isomorfismo para $q\leq n-2$ y un epimorfismo para $q=n-1$, donde $j\colon Y_n' \hookrightarrow Y_n$ es la inclusión.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Construiremos un elemento $n-$universal $u_n \in T(Y_n)$ tal que $u_n | Y_{n-1}=u_{n-1}$ y así $u_n|X=u$. Consideremos
+		\[\xymatrix{\bigvee_\alpha \mathbb{S}_\alpha^{n-1} \ar@<1ex>[r]^{f}\ar[r]_{cte} & Y_n'\ar@{^{(}->}[r]^j  & Y_n}\]
+		Ahora, $T[f](u_n')=T[cte](u_n')$, pues $T[cte](u'_n)=\varphi_{u_n'}([cte])=0=T[f](u'_n)$, esto último ya que $f|\mathbb{S}_\alpha=f_\alpha$ y para cada $\alpha\in\pi_{n-1}(Y_n')$, se tiene que $T[f_\alpha](u_n')=\varphi_{u_n'}(\alpha)=0$. Entonces, como $[j]\colon Y_n' \to Y_n$ es un coigualador y $T$ cumple la propiedad de mayer vietoris, por una proposicipon anterior, existe $u_n\in T(Y_n)$ tal que $u_n=u_n'$ y así $u_n |Y_{n-1}=u_{n-1}$.
+		
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Ahora, obtenemos el siguiente diagrama conmutativo:
+		\[\xymatrix{
+			\pi_q (Y_{n-1})\ar[rr]^{j_\#} \ar[rd]_{\varphi_{u_{n-1}}} && \pi_q(Y_n)\ar[ld]^{\varphi_{u_n}}\\
+			& T(\mathbb{S}^q) & 		
+		}\]
+		$j_\#$ es un isomorfismo para $q\leq n-2$ y un epimorfismo para $q=n-1$. Además, por inducción, $\varphi_{u_{n-1}}$ es isomorfismo para $q\leq n-2$ y un epimorfismo para $q=n-1$, por lo que $\varphi_{u_n}$ es un isomorfismo para $q\leq n-2$ y epi para $q=n-1$. 
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Sea $\gamma\in\pi_n-1(Y_n)$ tal que $\varphi_{u_n}(\gamma)=0\in T(\mathbb{S}^{n-1})$. Tomamos $\gamma'\in\pi_{n-1}/Y_{n-1})$ tal que $j_\#(\gamma')=\gamma$, entonces $\varphi_{u_{n-1}}(\gamma')=0$, por lo que existe $f_{\gamma'}\colon \mathbb{S}_{\gamma'}^{n-1}=\mathbb{S}^{n-1}\to Y_{n-1}$ que la representa, pero entonces $j_\# (\gamma')=[j\circ\gamma']=0$, pues se puede extender a una función $g\colon \mathbb{D}^{n}\to Y_{n}$, pues pegamos una celda para $f_{\gamma'}$. Entonces $\gamma=0$ y por lo tanto $\varphi_{u_n}$ es isomorfismo.
+		
+		Por lo tanto $u_n$ es un elemento $n-$universal.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{teo}
+		Sea $T$ un funtor de Brown, $Y_0$ un espacio en $\W_\ast$ y $u_0\in T(Y_0)$. Entonces existe un espacio $Y$ que se obtiene a partir de $Y_0$ pegando celdas y un elemento $\infty-$universal tal que $u|Y_0 = u_0$.
+	\end{teo}
+	
+	\begin{dem}
+		Por la proposición anterior, tenemos una sucesión de espacios 
+		\[Y_0 \subseteq Y_1 \subseteq \ldots \subseteq Y_n \subseteq \ldots\]
+		que se obtienen a partir de $Y_0$ pegando celdas, y elementos $n-$universales $u_n\in T(Y_n)$ tales que $u_n |Y_0 = u_0$. Sea $Y=\bigcup_{n\geq0}Y_n$ y le damos la topología de la unión. Notemos que al pegar celdas, $\pi_q(Y_n)\cong\pi_q(Y)$, para $q\leq n-1$.
+		
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Consideremos $f_0 ,f_1\colon \bigvee_n Y_n \to \bigvee_n Y_n$, donde $f_0|Y_n=i_n\colon Y_n\hookrightarrow Y_{n+1}$ y $f_1 =id$. La clase de homotopía de $i\colon\bigvee_n Y_n\to Y$, donde $i|Y_n\colon Y_n \hookrightarrow Y$ es la inclusión, es un coigualador, pues claramente $i\circ f_0 = i\circ f_1$ y si $j\colon \bigvee_n Y_n \to X'$ es tal que $j\circ f_0 = j\circ f_1 =j$, entonces definimos $f\colon Y\to X'$ dada por $f|Y_n = j|Y_n \colon Y_n \to X'$, que está bien definida pues $j$ iguala a $f_0$ y a $f_1$ y es continua pues es $j|Y_n$ es continua para cada $n$. Más aún, si tomamos $(u_n)_n\in\prod_n T(Y_n)$, este va a dar bajo $T[f_0]$ y $T[f_1]$ a $(u_n)$ pues $u_n|Y_{n-1}=u_{n-1}$. Entonces, por una proposición anterior, existe $u\in T(Y)$ tal que $u|Y_n =u_n$. 
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Además, el siguiente diagrama es conmutativo para toda $n$ y toda $q\leq n-1$:
+		\[\xymatrix{
+			\pi_q(Y_n)\ar[rr]^\cong \ar[rd]_\varphi & & \pi_q (Y)\ar[ld]^{\varphi_u} \\
+			& T(\mathbb{S}^q) &		
+		}\]
+		Entonces $u$ es $\infty-$universal.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{teo}
+		Sea $T$ un funtor de Brown. Si $Y$ y $Y'$ son complejos CW y $u\in T(Y)$ y $u'\in T(Y')$ son elemenos $\infty-$universales, entonces existe una equivalencia homotópica $h\colon Y\to Y'$ tal que $T[h](u')=u$.
+	\end{teo}
+	
+	\begin{dem}
+		Sea $Y_0=Y\vee T'$ y tomamos $u_0\in T(Y_0)$ tal que corresponde a $(u,u')\in T(Y)\times T(Y')$. Por el teorema anterior, existe un complejo $CW$ $Y''$ que contiene a $T_0$ y un elemento infinito $\infty-$universal $u''\in T(Y'')$ tal que $u''|Y_0 = u_0$. 
+		
+		La inclusión $j\colon Y\hookrightarrow Y_0 \hookrightarrow Y''$ induce el diagrama:
+		
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		\[\xymatrix{
+		\pi_q(Y)\ar[rr]^{j_\#} \ar[rd]_{\varphi_u}^\cong && \pi_q(Y'')\ar[ld]^{\varphi_{u''}}_\cong\\
+		& T(\mathbb{S}^q)		
+		}\]
+		Entonces $j$ es una equivalencia homotópica débil, pero por el teorema de Whitehead, $j$ es una equivalencia homotópica.
+		
+		Similarmente, existe una equivalencia homotópica $j''\colon Y''\to Y'$ tal que $T[j](u'')=u'$. Entonces la composición $j''\circ j$ es la equivalencia homotópica buscada.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{pro}
+		Sea $T$ un funtor de Brown, $Y$ un complejo $CW$, $u\in T(Y)$ un elemento $\infty-$universal y $(X,A)$ una pareja CW. Dados un mapeo punteado $g\colon A\to Y$ y $v\in T(X)$ tal que $T[g](u)=v$, entonces existe $f\colon X\to Y$ extensión de $g$ tal que $T[f](u)=v$.
+	\end{pro}
+	
+	\begin{dem}
+		Consideremos
+		\[\xymatrix{
+			& X \ar@{^{(}->}[rd]^{i_0}& & \\
+			A\ar@{^{(}->}[ru]^i \ar[rd]_g & & X\vee Y\ar[r]^j & Z\\
+			& Y \ar@{^{(}->}[ru]_{i_1} & & 
+		}\]
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		donde $i_0 ,i_1$ son las inclusiones y $[j]$ es un coigualador. Notemos que $Z$ es un complejo CW. Sea $v'\in T(X\vee Y)$ tal que corresponde a $(u,v)\in T(X)\times T(Y)$. Por una proposición anterior, existe $w\in T(Z)$ tal que $T[j](w)=v'$.
+		
+		Por un teorema anterior, existe un complejo CW $Y''$ y un elemento $\infty-$universal y $u'\in T(Y')$ tal que $u'|Z=w$. Dado que $Y'$ es un complejo $CW$ y $u'$ es un elemento $\infty-$universal al igual que $Y$ y $u$, por la proposición anterior, existe una equivalencia homotópica $h\colon Y'\to Y$ tal que $T[h](u')=u$.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Sea $f'$ la composición
+		\[\xymatrix{X\ar[r]^{i_0} & X\vee Y\ar[r]^j & Z\ar[r]^j' & Y'\ar[r]^h & Y}\]
+		Notemos que $g\simeq f'\circ i$. Sea $h'=j'\circ j\circ i_1$ y notemos que $T[h'](u')=u$ y que es una equivalencia homotópica pues el siguiente diagrama conmuta
+		\[\xymatrix{
+		\pi_q(Y)\ar[rr]^{h_\# '} \ar[rd]_{\varphi_{u}}^\cong && \pi_q(Y')\ar[ld]^{\varphi_{u'}}_\cong\\
+		& T(\mathbb{S}^q)		
+		}\]
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		y entonces $h\circ g\simeq h \circ f' \circ i$. 
+		
+		Ahora, como $i\colon A\hookrightarrow X$ es una cofibración (en general la inclusión de un subcomplejo es una cofibración), Sea $H$ uns homotopía entre $g$ y $f'\circ i$ y la extendemos a una homotopía $H'\colon X\times I\to Y$ y definimos $f=H'(\_,1)$. Entonces $f$ es la extensión buscada.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{pro}
+		Sea $u\in T(Y)$ un elemento $\infty-$universal, con $Y$ un complejo $CW$. Entonces $u$ es un elemento universal.
+	\end{pro}
+	
+	\begin{dem}
+		Sea $X$ un complejo $CW$ y $v\in T(X)$. Tomamos $A=\{x_0\}$ el punto base de $X$ y $g\colon A\to Y$ la función constante, por la proposición anterior, existe $f\colon X\to Y$ tal que $T[f](u)=\varphi_u ([f])=v$. Así, $\varphi_u$ es suprayectiva.
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Sean $[g_0],[g_1]\in[X,Y]_\ast$ tales que $\varphi_u ([g_0])=\varphi_u([g_1])$. Sea $X'=X\times I/{x_0}\times I$, que es un complejo CW con $q-$esqueleto $(X^q\times I/{x_0}\times I)\cup X^q\times\partial I$. Sea $A=X\times \partial I/\{x_0\}\times \partial I\cong X\vee X$. 
+		
+		Sea $\pi\colon X\times\partial I\twoheadrightarrow A$ el cociente y definimos $g\colon A\to Y$ tal que $g\circ\pi(x,0)=g_0(x)$ y $g\circ\pi(x,1)=g_1(x)$. Por otro lado, notemos que $p\colon X'\to X$ dada por $p\circ\pi(x,t)=x$ es una equivalencia homotópica con inverso $h(x)=\pi(x,0)$.
+		
+		Sea $v'=T[p]\circ T[g_0]\in T(X')$. Entonces, si $j\colon A \hookrightarrow X'$ es la inclusión, $T[j](u')$ corresponde a $(T[g_0](u),T[g_1](u))\in T(X)\times T(X)\cong T(A)$
+	\end{dem}
+\end{frame}
+
+\begin{frame}
+	\begin{dem}
+		Por la proposición anterior, existe una extensión $f\colon X'\to Y$ tal que $T[f](u)=u'$. 
+		
+		Entonces $H=f\circ\pi\colon X\times I\to X'\to Y$ es una homotopía entre $g_0$ y $g_1$ y así $\varphi_u$ es inyectiva.
+	\end{dem}
+\end{frame}
+
+\begin{frame}{El Teorema de Representabilidad de Brown}
+	Sea $T$ un funtor de Brown y tomemos $Y_0=\{\ast\}$ el espacio con un punto. Por un teorema anterior, existe un complejo CW $Y$ y un elemento $\infty-$universal $u\in T(Y)$ tal que $u|\{\ast\}=pt$. Por la proposición anterior, $u$ es un elemento universal. Así, hemos probado.
+	
+	\begin{teo}
+		Sea $T\colon \W_\ast \to \con_\ast$ un funtor de Brown, entonces $T$ es representable, es decir, existe un complejo CW $Y$ y una equivalencia natural $\varphi\colon [\_,Y]_\ast \to T$.
+	\end{teo}
+\end{frame}
+
+\begin{frame}
+	\begin{obs}
+		El teorema no es cierto si $\W_\ast$ no es la categoría de complejos CW conectables por trayectorias. Tampoco es cierto en el caso covariante.
+	\end{obs}
+	
+	\begin{obs}
+		En lugar de la categoría de complejos CW conectables por trayectorias, podemos tomar la categoría de espacios conectables por trayectorias con el tipo de homotopía de un complejo CW.
+	\end{obs}
+\end{frame}
+
+\section{Teorías de cohomología}
+\begin{frame}{Teorías de cohomología}
+\begin{df}
+Una teor\'ia de cohomología (reducida) aditiva $h^{\ast}$ consta de una sucesi\'on de funtores y de isomorfismos naturales, llamados isomorfismos de suspensi\'on
+\[h^{q}:\T_{\ast}^{op}\to\G \mbox{ y } \delta^{q}:h^{q}\circ S\to h^{q-1},\]
+
+$q\in\Z$, tales que cumplen lo siguiente:
+\begin{itemize}
+    \item Homotop\'ia: Si $f\simeq g:(X,x_{0})\to(Y,y_{0})$, entonces $f^{\ast}=g^{\ast}:h^{q}(Y)\to h^{q}(X)$.
+\end{itemize}
+\end{df}    
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Exactitud: Para cada par punteado $(X,A)$, se tiene una sucesi\'on exacta
+\[h^{q}(X\cup CA)\xrightarrow{j^{\ast}} h^{q}(X)\xrightarrow{i^{\ast}} h^{q}(A)\]
+\item Aditividad: Si $X=\bigvee_{\alpha}X_{\alpha}$, entonces $h^{q}(X)\cong\prod_{\alpha} h^{q}(X_{\alpha})$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Si tomamos una triada escisiva $(X,A,B)$, se puede demostrar que existe una sucesi\'on exacta de la forma:
+
+\[\cdots\rightarrow h^{q-1}(A\cap B)\xrightarrow{\overline{\delta}}h^{q}(X)\xrightarrow{\alpha}h^{q}(A)\oplus h^{q}(B)\xrightarrow{\beta}h^{q}(A\cap B)\rightarrow\cdots\]
+
+donde $\alpha(c)=(i^{\ast}(c),j^{\ast}(c))$ y $\beta(a,b)=i^{\ast}(a)-j^{\ast}(b)$.
+
+Por lo que cumplen la propiedad de Mayer-Vietoris.
+\end{frame}
+
+\begin{frame}
+El teorema de representabilidad de Brown asegura que existe una sucesi\'on de complejos $CW$, $\{W_{q}\}_{q\in\Z}$, tales que $[-,W_{q}]_{\ast}\cong h^{q}$.
+\end{frame}
+
+\section{Espectros}
+
+\begin{frame}{Motivación}
+Sea una teor\'ia de cohomolog\'ia $h^{\ast}$ y la sucesi\'on de complejos $CW$ $\{W_{q}\}_{q\in\Z}$, que la representa. Definimos $P_{q}=\Omega W_{q+1}$.
+
+Los isomorfismos $\delta^{q+1}:h^{q+1}(SX)\to h^{q}(X)$ inducen un isomorfismo 
+\[[S X,W_{q+1}]_{\ast}\xrightarrow{\cong}[X,W_{q}]_{\ast}.\]
+\end{frame}
+
+\begin{frame}{Motivación}
+Utilizando la adjunci\'on cl\'asica suspensi\'on reducida-espacio de lazos, tenemos 
+\[[SX,W_{q+1}]_{\ast}\cong[X,\Omega W_{q+1}]_{\ast}\]
+
+Y entonces llegamos a la siguiente cadena de isomorfismos
+
+\[h^{q}(X)\cong[X,W_{q}]_{\ast}\cong[X,\Omega W_{q+1}]_{\ast}=[X,P_{q}]_{\ast}\]
+\end{frame}
+
+\begin{frame}{Motivación}
+Tenemos una nueva sucesi\'on de isomorfismos
+
+\[[X,P_{q}]_{\ast}\cong h^{q}(X)\cong h^{q+1}(SX)\cong[SX,P_{q+1}]_{\ast}\cong[X,\Omega P_{q+1}]_{\ast}\]
+
+Lo que induce una equivalencia homotópica $\epsilon_{q}\colon P_{q}\to\Omega P_{q+1}$.
+\end{frame}
+
+\begin{frame}{$\Omega$-prespectros}
+\begin{df}
+Una familia de complejos $CW$ $P=\{P_{q}\}_{q\in\Z}$, junto con equivalencias homot\'opicas $\epsilon_{q}\colon P_{q}\to\Omega P_{q+1}$, es llamado un $\Omega$-prespectro.
+\end{df}
+\end{frame}
+
+\begin{frame}{Ejemplos}
+	\begin{itemize}
+		\item Dado un grupo $G$ abeliano, el espectro $HG$ dado por $HG_q=0$ si $q<0$ y $HG_q = K(G,q)$ es el espectro de Eilenberg-Maclane que representa a la cohomología singular (y a la celular).
+		\item El espectro $P$ dado por $P_{2q}=BU\times\Z$ y $P_{2q+1}=BU$, donde $BU=\bigcup_{n\geq1}G_n(\R^\infty)$ es el espectro (complejo) de Bott que representa a la $k-$teoría compleja.
+		
+		\item De igual manera, hay un espectro real de Bott que representa a la $k-$teoría real.
+	\end{itemize}
+\end{frame}
+
+\section{Referencias}
+\begin{frame}{Referencias}
+\begin{thebibliography}{} 
+
+\bibitem{AGP} Aguilar, M., Gitler, S., Prieto, C. (2008). Algebraic Topology from a Homotopical Viewpoint: Springer New York.
+\bibitem{EHB} Brown, E. (1962). Cohomology Theories. Annals of Mathematics, 75(3), second series, 467-484. doi:10.2307/1970209
+\bibitem{MIL} J. Milnor, On Spaces having the same homotopy type of a CW-Complex, Trans. Amer. Math. Soc 90, (1959), 272-280
+\end{thebibliography}
+\end{frame}
 
 \end{document}
