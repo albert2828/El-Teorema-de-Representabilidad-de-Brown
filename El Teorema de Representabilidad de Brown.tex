@@ -428,7 +428,7 @@
 \begin{frame}{Teorías de cohomología}
 \begin{df}
 Una teor\'ia de cohomología (reducida) aditiva $h^{\ast}$ consta de una sucesi\'on de funtores y de isomorfismos naturales, llamados isomorfismos de suspensi\'on
-\[h^{q}:\T_{\ast}^{op}\to\G \mbox{ y } \delta^{q}:h^{q}\circ S\to h^{q-1},\]
+\[h^{q}:\mathbf{W}_\ast\to\G \mbox{ y } \delta^{q}:h^{q}\circ S\to h^{q-1},\]
 
 $q\in\Z$, tales que cumplen lo siguiente:
 \begin{itemize}
@@ -487,17 +487,39 @@ Lo que induce una equivalencia homotópica $\epsilon_{q}\colon P_{q}\to\Omega P_
 
 \begin{frame}{$\Omega$-prespectros}
 \begin{df}
-Una familia de complejos $CW$ $P=\{P_{q}\}_{q\in\Z}$, junto con equivalencias homot\'opicas $\epsilon_{q}\colon P_{q}\to\Omega P_{q+1}$, es llamado un $\Omega$-prespectro.
+Una familia de complejos $CW$ $P=\{P_{q}\}_{q\in\Z}$, junto con equivalencias homot\'opicas $\epsilon_{q}\colon P_{q-1}\to\Omega P_{q}$, es llamado un $\Omega$-prespectro.
 \end{df}
 \end{frame}
 
 \begin{frame}{Ejemplos}
 	\begin{itemize}
 		\item Dado un grupo $G$ abeliano, el espectro $HG$ dado por $HG_q=0$ si $q<0$ y $HG_q = K(G,q)$ es el espectro de Eilenberg-Maclane que representa a la cohomología singular (y a la celular).
-		\item El espectro $P$ dado por $P_{2q}=BU\times\Z$ y $P_{2q+1}=BU$, donde $BU=\bigcup_{n\geq1}G_n(\R^\infty)$ es el espectro (complejo) de Bott que representa a la $k-$teoría compleja.
+		\item El espectro $P$ dado por $P_{2q}=BU\times\Z$ y $P_{2q+1}=BU$, donde $BU=\bigcup_{n\geq1}G_n(\C^\infty)$ es el espectro (complejo) de Bott que representa a la $k-$teoría compleja.
 		
 		\item De igual manera, hay un espectro real de Bott que representa a la $k-$teoría real.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Teorías de cohomología asociadas a prespectros}
+	Por otro lado, dado un $\Omega-$prespectro $P=\{P_q\}_{q\in \Z}$, este define una teoría de cohomología $h^\ast$. Sea $h^q\colon\mathbf{W}_\ast	\to \mathbf{Ab}$ dado por $h^q(X)=[X,P_q]_\ast$. Como tenemos equivalencias homotópicas $P_q \simeq \Omega P_{q+}\simeq \Omega\Omega P_{q+2}$, entonces $P_q$ es un $H-$grupo $H-$abeliano y así $h^q(X)$ es un grupo abeliano para todo espacio $X$. Sea $\epsilon_{q} \colon P_{q-1} \to \Omega P_q$ la equivalencia homotópica,entonces $\epsilon_{q}$ define una equivalencia natural $\delta^q _X\colon [SX, P_q]\to [X,\Omega P_q]\to[X,P_{q-1}]$, dada por $\delta^q[f]=[\tilde{\epsilon}_q\bar{f}]$, donde $\tilde{\epsilon}_q$ es un inverso homotópico de $\epsilon_q$ y $\bar{f}$ es la función adjunta de $f$. 
+\end{frame}
+
+\begin{frame}{Teorías de cohomología asociadas a prespectros}
+	Claramente $h^\ast$ cumple la propiedad de invarianza homotópica. 
+	
+	$h^\ast$ cumple la propiedad de exactitud, pues por la propiedad universal del producto cuña, se tiene un isomorfismo 
+	\[[\bigvee_\alpha X_\alpha,Z]_\ast\cong\prod_\alpha[X_\alpha , Z]_\ast\]
+	para cualquier espacio $Z$.
+	
+	$h$ cumple la propiedad de exactitud, pues si $(X,A)$ es una pareja CW, notamos que $X\cup CA = C_i$, donde $i\colon \hookrightarrow X$ es la inclusión.
+\end{frame}
+
+\begin{frame}{Teorías de cohomología asociadas a prespectros}
+	Entonces consideramos 
+	\[h^q(X\cup CA)\to h^q (X) \to h^q(A)\]
+	Si $[f]\in h^q(X)$ es tal que $i^\ast[f]=0=[cte]$, entonces $f\circ i\simeq cte$, pero como $[j]\colon X\to C_i$ es el coigualador de $i$ y la constante, entonces existe $g\colon C_i \to P_q$ tal que $g\circ j\simeq f$, es decir, $j^\ast[g]=[f]$, por lo que la sucesión es exacta.
+	
+	Así, $h^\ast$ es una teoría de cohomología aditiva.
 \end{frame}
 
 \section{Referencias}
